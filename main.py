@@ -36,7 +36,7 @@ requete = {
     "Longitude": longitude,
 }
 
-if st.button("🚀 Envoyer la requête", type="primary", use_container_width=True):
+if st.button("Envoyer la requête", type="primary", use_container_width=True):
     try:
         with st.spinner("Envoi de la requête en cours..."):
             response = requests.post(api_url, json=requete, timeout=15)
