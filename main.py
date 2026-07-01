@@ -1,7 +1,7 @@
 import streamlit as st
 import requests
 
-api_url = "https://supreme-succotash-7v9gw6p7x79whrrvp-8000.app.github.dev/docs#/default/predict"
+api_url = "https://supreme-succotash-7v9gw6p7x79whrrvp-8000.app.github.dev/predict"
 
 st.set_page_config(page_title="Prédiction Prix Immobilier", page_icon="🏠", layout="centered")
 
@@ -37,29 +37,26 @@ requete = {
 }
 
 if st.button("🚀 Envoyer la requête", type="primary", use_container_width=True):
-    if not api_url:
-        st.error("Veuillez renseigner l'URL de l'API.")
-    else:
-        try:
-            with st.spinner("Envoi de la requête en cours..."):
-                response = requests.post(api_url, json=requete, timeout=15)
+    try:
+        with st.spinner("Envoi de la requête en cours..."):
+            response = requests.post(api_url, json=requete, timeout=15)
 
-            if response.status_code == 200:
-                st.success("Requête envoyée avec succès !")
-                try:
-                    result = response.json()
-                    st.subheader("Réponse de l'API")
-                    st.json(result)
-                except ValueError:
-                    st.subheader("Réponse de l'API (texte brut)")
-                    st.text(response.text)
-            else:
-                st.error(f"Erreur : l'API a répondu avec le code {response.status_code}")
+        if response.status_code == 200:
+            st.success("Requête envoyée avec succès !")
+            try:
+                result = response.json()
+                st.subheader("Réponse de l'API")
+                st.json(result)
+            except ValueError:
+                st.subheader("Réponse de l'API (texte brut)")
                 st.text(response.text)
+        else:
+            st.error(f"Erreur : l'API a répondu avec le code {response.status_code}")
+            st.text(response.text)
 
-        except requests.exceptions.ConnectionError:
-            st.error("Impossible de se connecter à l'API. Vérifiez l'URL et que le serveur est bien lancé.")
-        except requests.exceptions.Timeout:
-            st.error("La requête a expiré (timeout).")
-        except requests.exceptions.RequestException as e:
-            st.error(f"Une erreur est survenue lors de la requête : {e}")
+    except requests.exceptions.ConnectionError:
+        st.error("Impossible de se connecter à l'API. Vérifiez l'URL et que le serveur est bien lancé.")
+    except requests.exceptions.Timeout:
+        st.error("La requête a expiré (timeout).")
+    except requests.exceptions.RequestException as e:
+        st.error(f"Une erreur est survenue lors de la requête : {e}")
