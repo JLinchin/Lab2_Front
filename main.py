@@ -5,7 +5,7 @@ api_url = "https://supreme-succotash-7v9gw6p7x79whrrvp-8000.app.github.dev/predi
 
 st.set_page_config(page_title="Prédiction Prix Immobilier", page_icon="🏠", layout="centered")
 
-st.title("🏠 Prédiction du prix d'un logement")
+st.title("Prédiction du prix d'un logement")
 st.write("Renseignez les champs ci-dessous puis envoyez la requête à l'API.")
 
 st.subheader("Caractéristiques du logement")
