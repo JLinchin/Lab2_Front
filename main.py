@@ -3,9 +3,9 @@ import requests
 
 api_url = "https://supreme-succotash-7v9gw6p7x79whrrvp-8000.app.github.dev/predict"
 
-st.set_page_config(page_title="Prédiction Prix Immobilier", page_icon="🏠", layout="centered")
+st.set_page_config(page_title="Prédiction Prix Immobilier", layout="centered")
 
-st.title("🏠 Prédiction du prix d'un logement")
+st.title("Prédiction du prix d'un logement")
 st.write("Renseignez les champs ci-dessous puis envoyez la requête à l'API.")
 
 st.subheader("Caractéristiques du logement")
@@ -36,7 +36,7 @@ requete = {
     "Longitude": longitude,
 }
 
-if st.button("🚀 Envoyer la requête", type="primary", use_container_width=True):
+if st.button("Envoyer la requête", type="primary", use_container_width=True):
     if not api_url:
         st.error("Veuillez renseigner l'URL de l'API.")
     else:
